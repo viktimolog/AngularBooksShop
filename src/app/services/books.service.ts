@@ -37,7 +37,7 @@ export class BooksService {
   }
 
   addBook(book: Book){
-
+      this.books.unshift(book);
   }
 
   editBook(book: Book){

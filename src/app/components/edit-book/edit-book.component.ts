@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-
 import { BooksService } from "../../services/books.service";
 import { Book } from "../../models/Book";
 
@@ -25,14 +24,13 @@ export class EditBookComponent implements OnInit {
       })
   }
 
-    editBook(){
-      const updatedBook = {...this.book};
-      this.booksService.editBook(updatedBook).subscribe((book: Book) => {
-          if(book){
-              //Here will be success message
-              this.router.navigate(['/panel']);
-          }
-      })
-    }
-
+  editBook(){
+    const updatedBook = {...this.book};
+    this.booksService.editBook(updatedBook).subscribe((book: Book) => {
+        if(book){
+            //Here will be success message
+            this.router.navigate(['/panel']);
+        }
+    })
+  }
 }
