@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+      <div class="col-4" *ngFor="let book of books">
+          <div class="card card-body">
+              <div class="card-title">{{book.name}}</div>
+              <span class="text-info">{{book.author}}</span>
+              <p class="card-text">{{book.description}}</p>
+              <a href="{{link.link}}" *ngFor="let link of book.link">{{link.type}}</a>
+              <button class="btn btn-danger mt-3">Delete</button>
+              <a class="btn btn-primary mt-3" routerLink="/books/{{book.id}}">Edit</a>
+      </div>
+      </div>
+  </div>
+</div>
