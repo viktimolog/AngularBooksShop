@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { BooksService } from "../../services/books.service";
-import { Book } from "../../models/Book";
+import { ActivatedRoute, Router } from '@angular/router';
+import { BooksService } from '../../services/books.service';
+import { Book } from '../../models/Book';
 
 @Component({
   selector: 'app-edit-book',
@@ -18,19 +18,19 @@ export class EditBookComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.bookId = this.activatedRoute.snapshot.params['id'];
+      this.bookId = this.activatedRoute.snapshot.params.id;
       this.booksService.getBookById(this.bookId).subscribe((book: Book) => {
             this.book = book;
-      })
+      });
   }
 
-  editBook(){
+  editBook() {
     const updatedBook = {...this.book};
     this.booksService.editBook(updatedBook).subscribe((book: Book) => {
-        if(book){
+        if (book) {
             //Here will be success message
             this.router.navigate(['/panel']);
         }
-    })
+    });
   }
 }

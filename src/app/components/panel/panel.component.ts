@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksService } from "../../services/books.service";
-import { Book } from "../../models/Book";
+import { BooksService } from '../../services/books.service';
+import { Book } from '../../models/Book';
 
 @Component({
   selector: 'app-panel',
@@ -18,7 +18,12 @@ export class PanelComponent implements OnInit {
       //Get all books
       this.bookService.getBooks().subscribe((books: Book[]) => {
           this.books = books;
-      })
-  }
+      });
 
+      this.bookService.newBook.subscribe(book => {
+          if (book.name) {
+              this.books.unshift(book);
+          }
+      });
+  }
 }

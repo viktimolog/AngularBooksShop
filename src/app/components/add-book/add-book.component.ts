@@ -37,22 +37,15 @@ export class AddBookComponent implements OnInit {
                   link: ''
               }
           ]
-      }
+      };
   }
 
-  addBook(){
-
-        console.log({
-            book: this.book
-        });
-
-      // const updatedBook = {...this.book};
-      // this.booksService.editBook(updatedBook).subscribe((book: Book) => {
-      //     if(book){
-      //         //Here will be success message
-      //         this.router.navigate(['/panel']);
-      //     }
-      // })
-
+  addBook() {
+      this.booksService.addBook(this.book).subscribe((books: Book[]) => {
+          if (books.length) {
+              //Here will be success message
+              this.router.navigate(['/panel']);
+          }
+      });
   }
 }

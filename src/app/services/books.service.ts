@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { of } from "rxjs/internal/observable/of";
+import { of } from 'rxjs/internal/observable/of';
 
-import { Book } from "../models/Book";
+import { Book } from '../models/Book';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class BooksService {
@@ -24,33 +25,54 @@ export class BooksService {
         }
     ];
 
-  constructor() { }
+    // Add new book
+    private bookSource = new BehaviorSubject<Book>({
+        id: '',
+        name: '',
+        author: '',
+        description: '',
+        link: [
+            {
+                type: 'epub',
+                link: ''
+            },
+            {
+                type: 'pdf',
+                link: ''
+            }
+        ]
+    });
 
-  getBooks(){
-      return of(this.books);
+    newBook = this.bookSource.asObservable();
 
-  }
+    constructor() { }
 
-  getBookById(id: string){
-      const book = this.books.find(book => book.id === id);
-      return of(book);
-  }
+    getBooks() {
+        return of(this.books);
 
-  addBook(book: Book){
-      this.books.unshift(book);
-  }
+    }
 
-  editBook(book: Book){
-      this.books = this.books.map(item => {
-         if(item.id === book.id){
-             item = book;
-         }
-         return item;
-      });
-      return of(book);
-  }
+    getBookById(id: string) {
+        const book = this.books.find(item => item.id === id);
+        return of(book);
+    }
 
-  deleteBook(id: string){
+    addBook(book: Book) {
+        this.books.unshift(book);
+        return of(this.books);
+    }
 
-  }
+    editBook(book: Book) {
+        this.books = this.books.map(item => {
+           if (item.id === book.id){
+               item = book;
+           }
+           return item;
+        });
+        return of(book);
+    }
+
+    deleteBook(id: string) {
+
+    }
 }
