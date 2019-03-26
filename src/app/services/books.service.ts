@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs/internal/observable/of';
-
 import { Book } from '../models/Book';
-import { BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 
 @Injectable()
 export class BooksService {
@@ -25,31 +23,10 @@ export class BooksService {
         }
     ];
 
-    // Add new book
-    private bookSource = new BehaviorSubject<Book>({
-        id: '',
-        name: '',
-        author: '',
-        description: '',
-        link: [
-            {
-                type: 'epub',
-                link: ''
-            },
-            {
-                type: 'pdf',
-                link: ''
-            }
-        ]
-    });
-
-    newBook = this.bookSource.asObservable();
-
     constructor() { }
 
     getBooks() {
         return of(this.books);
-
     }
 
     getBookById(id: string) {
@@ -64,7 +41,7 @@ export class BooksService {
 
     editBook(book: Book) {
         this.books = this.books.map(item => {
-           if (item.id === book.id){
+           if (item.id === book.id) {
                item = book;
            }
            return item;
@@ -73,6 +50,6 @@ export class BooksService {
     }
 
     deleteBook(id: string) {
-
+        return of(this.books.filter(item => item.id !== id));
     }
 }

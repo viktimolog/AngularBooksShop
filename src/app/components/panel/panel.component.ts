@@ -11,19 +11,19 @@ export class PanelComponent implements OnInit {
     books: Book[];
 
   constructor(
-      public bookService: BooksService
+      public booksService: BooksService
   ) { }
 
   ngOnInit() {
       //Get all books
-      this.bookService.getBooks().subscribe((books: Book[]) => {
+      this.booksService.getBooks().subscribe((books: Book[]) => {
           this.books = books;
       });
+  }
 
-      this.bookService.newBook.subscribe(book => {
-          if (book.name) {
-              this.books.unshift(book);
-          }
+  deleteBook(id: string) {
+      this.booksService.deleteBook(id).subscribe((books: Book[]) => {
+          this.books = books;
       });
   }
 }
