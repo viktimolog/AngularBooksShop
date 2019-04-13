@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   isLogin: boolean = false;
+  userEmail: string = '';
 
 
   constructor(
@@ -18,8 +19,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
       this.authService.checkAuth().subscribe(auth => {
-          if(auth) {
+          if (auth) {
               this.isLogin = true;
+              this.userEmail = auth.email;
           } else {
               this.isLogin = false;
           }
@@ -30,6 +32,7 @@ export class NavbarComponent implements OnInit {
       this.authService.logout()
           .then(() => {
               this.isLogin = false;
+              this.userEmail = '';
               this.router.navigate(['/login']);
           });
   }

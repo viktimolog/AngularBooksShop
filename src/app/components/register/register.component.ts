@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
+
     email: string;
     password: string;
 
@@ -28,11 +29,12 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        this.authService.login(this.email, this.password)
+        this.authService.register(this.email, this.password)
             .then(user => {
+                console.log({user});
                 this.router.navigate(['panel']);
                 // show message success
-                this.flashMessage.show('Success Login!', {
+                this.flashMessage.show('Success Registration!', {
                     cssClass: 'alert-success',
                     showCloseBtn: true,
                     closeOnClick: true,
@@ -50,4 +52,5 @@ export class LoginComponent implements OnInit {
                 });
             });
     }
+
 }

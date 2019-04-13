@@ -35,6 +35,8 @@
             </li>
         </ul>
     </div>
+    <span class="ml-auto mr-3 navbar-text" *ngIf="isLogin">{{userEmail}}</span>
     <button class="btn btn-danger" *ngIf="isLogin" (click)="logout()">Logout</button>
     <a routerLink="/login" class="btn btn-warning" *ngIf="!isLogin">Login</a>
+    <a routerLink="/register" class="btn btn-success ml-3" *ngIf="!isLogin">Register</a>
 </nav>
