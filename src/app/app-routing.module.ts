@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from '@angular/router';
 
-import { PanelComponent } from "./components/panel/panel.component";
-import { AboutComponent} from "./components/about/about.component";
-import { AddBookComponent} from "./components/add-book/add-book.component";
-import { EditBookComponent} from "./components/edit-book/edit-book.component";
-import { NotFoundComponent} from "./components/not-found/not-found.component";
+import { PanelComponent } from './components/panel/panel.component';
+import { AboutComponent} from './components/about/about.component';
+import { AddBookComponent} from './components/add-book/add-book.component';
+import { EditBookComponent} from './components/edit-book/edit-book.component';
+import { NotFoundComponent} from './components/not-found/not-found.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'panel', pathMatch: 'full' },
     { path: 'panel', component: PanelComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'about', component: AboutComponent },
     { path: 'addbook', component: AddBookComponent },
     { path: 'books/:id', component: EditBookComponent },
@@ -18,7 +20,7 @@ const routes: Routes = [
 
 @NgModule({
     exports: [RouterModule],
-    imports:[
+    imports: [
         RouterModule.forRoot(routes)
     ]
 })

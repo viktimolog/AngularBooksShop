@@ -12,26 +12,29 @@
       <span class="navbar-toggler-icon"></span>
   </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav mr-auto"></ul>
-        <li class="nav-item">
-            <a
-                class="nav-link"
-                routerLink="/panel"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}"
-            >
-                Home
-            </a>
-        </li>
-        <li class="nav-item">
-            <a
-                class="nav-link"
-                routerLink="/about"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}"
-            >
-                About
-            </a>
-        </li>
+        <ul class="navbar-nav mr-auto" *ngIf="isLogin">
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/panel"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                >
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a
+                    class="nav-link"
+                    routerLink="/about"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                >
+                    About
+                </a>
+            </li>
+        </ul>
     </div>
+    <button class="btn btn-danger" *ngIf="isLogin" (click)="logout()">Logout</button>
+    <a routerLink="/login" class="btn btn-warning" *ngIf="!isLogin">Login</a>
 </nav>
