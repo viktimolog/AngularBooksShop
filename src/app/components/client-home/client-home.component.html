@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-4" *ngFor="let book of books">
+            <div class="card card-body">
+                <div class="card-title d-flex align-items-center">{{book.name}}
+                    <span class="badge badge-success ml-auto">{{
+                      book.price | currency: 'USD'
+                      }}</span>
+                </div>
+                <span class="text-info">{{book.author}}</span>
+                <span class="text-primary">{{book.date | customDate:'ru-Ru':'full'}}</span>
+                <p class="card-text">{{book.description}}</p>
+                <a href="{{link.link}}" *ngFor="let link of book.links">{{link.type}}</a>
+                <button
+                        *ngIf="!book.isAddBasket"
+                        class="btn btn-success"
+                        (click)="book.isAddBasket = true; addBook(book)"
+                >
+                    Add to basket
+                </button>
+                <button
+                        *ngIf="book.isAddBasket"
+                        class="btn btn-warning"
+                        (click)="book.isAddBasket = false; deleteBookFromBasket(book.id)"
+                >
+                    Delete from basket
+                </button>
+                <a class="btn btn-primary mt-3" href="">More</a>
+            </div>
+        </div>
+    </div>
+</div>

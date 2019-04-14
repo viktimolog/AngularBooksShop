@@ -17,11 +17,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BooksService } from './services/books.service';
 import { AuthService } from './services/auth.service';
 import { IdService } from './services/id.service';
+import { BasketService } from './services/basket.service';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { CurrencyComponent } from './components/currency/currency.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { ClientHomeComponent } from './components/client-home/client-home.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { CurrencyComponent } from './components/currency/currency.component';
     LoginComponent,
     RegisterComponent,
     CustomDatePipe,
-    CurrencyComponent
+    CurrencyComponent,
+    BasketComponent,
+    ClientHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,7 @@ import { CurrencyComponent } from './components/currency/currency.component';
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [BooksService, IdService, AuthService],
+  providers: [BooksService, IdService, AuthService, BasketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
