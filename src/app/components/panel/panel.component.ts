@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../../services/books.service';
 import { Book } from '../../models/Book';
+import { CurrencyService } from '../../services/currency.service';
+import { Currency } from '../../models/Currency';
 
 @Component({
   selector: 'app-panel',
@@ -11,14 +13,20 @@ export class PanelComponent implements OnInit {
     books: Book[];
     searchText: string;
     searchingResult: Book[] = [];
+    currentCurrency: Currency;
 
   constructor(
-      public booksService: BooksService
+      public booksService: BooksService,
+      public currencyService: CurrencyService
   ) { }
 
   ngOnInit() {
       //Get all books
       this.booksService.getBooks().subscribe((books: Book[]) => this.books = books);
+      //Subscribe currency update
+      this.currencyService.selectedCurrency.subscribe(data => {
+          this.currentCurrency = {...data.find(item => item.isActive === true)};
+      });
   }
 
   // deleteBook(id: string) {

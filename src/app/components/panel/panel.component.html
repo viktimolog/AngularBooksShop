@@ -12,12 +12,18 @@
                    (keyup)="searchBook()"
             >
         </div>
+        <div class="col-4">
+            <app-currency></app-currency>
+        </div>
     </div>
-  <div class="row">
+  <div class="row" *ngIf="!searchText">
       <div class="col-4" *ngFor="let book of books">
           <div class="card card-body">
               <div class="card-title d-flex align-items-center">{{book.name}}
-                  <span class="badge badge-success ml-auto">{{book.price | currency: 'USD'}}</span>
+                  <span class="badge badge-success ml-auto">{{
+                      book.price * currentCurrency['coefficient']
+                      | currency: currentCurrency['name']
+                      }}</span>
               </div>
 
               <span class="text-info">{{book.author}}</span>
@@ -26,7 +32,25 @@
               <a href="{{link.link}}" *ngFor="let link of book.links">{{link.type}}</a>
               <button class="btn btn-danger mt-3" (click)="deleteBook(book.id)">Delete</button>
               <a class="btn btn-primary mt-3" routerLink="/books/{{book.id}}">Edit</a>
-      </div>
+          </div>
       </div>
   </div>
+    <div class="row" *ngIf="searchText">
+        <div class="alert alert-info col-6 mx-auto" *ngIf="searchText && !searchingResult.length">
+            Books not found
+        </div>
+        <div class="col-4" *ngFor="let book of searchingResult">
+            <div class="card card-body">
+                <div class="card-title d-flex align-items-center">{{book.name}}
+                    <span class="badge badge-success ml-auto">{{book.price | currency: 'USD'}}</span>
+                </div>
+                <span class="text-info">{{book.author}}</span>
+                <span class="text-primary">{{book.date | customDate:'ru-Ru':'full'}}</span>
+                <p class="card-text">{{book.description}}</p>
+                <a href="{{link.link}}" *ngFor="let link of book.links">{{link.type}}</a>
+                <button class="btn btn-danger mt-3" (click)="deleteBook(book.id)">Delete</button>
+                <a class="btn btn-primary mt-3" routerLink="/books/{{book.id}}">Edit</a>
+            </div>
+        </div>
+    </div>
 </div>

@@ -42,12 +42,12 @@ export class AddBookComponent implements OnInit {
       };
   }
 
-  addBook() {
-      this.booksService.addBook(this.book).subscribe((books: Book[]) => {
-          if (books.length) {
-              //Here will be success message
-              this.router.navigate(['/panel']);
-          }
-      });
-  }
+  // addBook() {
+  //     this.booksService.addBook(this.book).subscribe((books: Book[]) => {
+  //         if (books.length) {
+  //             //Here will be success message
+  //             this.router.navigate(['/panel']);
+  //         }
+  //     });
+  // }
 }

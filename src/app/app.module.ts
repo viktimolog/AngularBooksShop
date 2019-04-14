@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { CurrencyComponent } from './components/currency/currency.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    CurrencyComponent
   ],
   imports: [
     BrowserModule,

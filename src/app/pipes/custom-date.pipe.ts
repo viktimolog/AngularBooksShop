@@ -35,5 +35,4 @@ export class CustomDatePipe implements PipeTransform {
     }
     return result;
   }
-
 }

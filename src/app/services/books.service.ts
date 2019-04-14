@@ -37,22 +37,22 @@ export class BooksService {
 
     }
 
-    addBook(book: Book) {
-        this.books.unshift(book);
-        return of(this.books);
-    }
-
-    editBook(book: Book) {
-        this.books = this.books.map(item => {
-           if (item.id === book.id) {
-               item = book;
-           }
-           return item;
-        });
-        return of(book);
-    }
-
-    deleteBook(id: string) {
-        return of(this.books.filter(item => item.id !== id));
-    }
+    // addBook(book: Book) {
+    //     this.books.unshift(book);
+    //     return of(this.books);
+    // }
+    //
+    // editBook(book: Book) {
+    //     this.books = this.books.map(item => {
+    //        if (item.id === book.id) {
+    //            item = book;
+    //        }
+    //        return item;
+    //     });
+    //     return of(book);
+    // }
+    //
+    // deleteBook(id: string) {
+    //     return of(this.books.filter(item => item.id !== id));
+    // }
 }
