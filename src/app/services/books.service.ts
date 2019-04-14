@@ -1,37 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../models/Book';
 import { Observable, of } from 'rxjs';
+import {
+    AngularFirestore,
+    AngularFirestoreCollection,
+    AngularFirestoreDocument
+} from 'angularfire2/firestore';
+import { Book } from '../models/Book';
+
 
 @Injectable()
 export class BooksService {
-    books: Book[] = [
-        {
-            id: '71e9a',
-            name: 'Выразительный JavaScript',
-            author: 'Marijn Haverbeke',
-            description: 'lorem lorem',
-            link: [
-                {
-                    type: 'epub',
-                    link: 'link'
-                },
-                {
-                    type: 'pdf',
-                    link: 'link'
-                }
-            ]
-        }
-    ];
+    booksCollection: AngularFirestoreCollection<Book>;
+    bookDocument: AngularFirestoreDocument<Book>;
+    books: Observable<Book[]>;
 
-    constructor() { }
+    constructor(
+        private afs: AngularFirestore
+    ) {
+        this.booksCollection = this.afs.collection('books');
+    }
 
-    getBooks(): Observable<Book[]> {
-        return of(this.books);
+    getBooks() {
+        this.books = this.booksCollection.snapshotChanges().map(
+            collection => {
+                return collection.map(document => {
+                   const data = document.payload.doc.data() as Book;
+                   data.id = document.payload.doc.id;
+                   return data;
+                });
+            }
+        );
+        return this.books;
     }
 
     getBookById(id: string) {
-        const book = this.books.find(item => item.id === id);
-        return of(book);
+
     }
 
     addBook(book: Book) {
