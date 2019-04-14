@@ -9,6 +9,8 @@ import { Book } from '../../models/Book';
 })
 export class PanelComponent implements OnInit {
     books: Book[];
+    searchText: string;
+    searchingResult: Book[] = [];
 
   constructor(
       public booksService: BooksService
@@ -16,14 +18,15 @@ export class PanelComponent implements OnInit {
 
   ngOnInit() {
       //Get all books
-      this.booksService.getBooks().subscribe((books: Book[]) => {
-          this.books = books;
-      });
+      this.booksService.getBooks().subscribe((books: Book[]) => this.books = books);
   }
 
-  deleteBook(id: string) {
-      this.booksService.deleteBook(id).subscribe((books: Book[]) => {
-          this.books = books;
-      });
+  // deleteBook(id: string) {
+  //     this.booksService.deleteBook(id).subscribe((books: Book[]) => this.books = books);
+  // }
+
+  searchBook() {
+      this.searchingResult = this.books.filter((book: Book) => book.name.toLowerCase().indexOf(this.searchText) !== -1);
+      console.log({searchingResult: this.searchingResult});
   }
 }

@@ -1,12 +1,29 @@
 <div class="container">
-    <a routerLink="/addbook" class="btn btn-primary mb-3">Add new book</a>
+    <div class="controls d-flex align-items-center mb-3">
+        <div class="col-2">
+            <a routerLink="/addbook" class="btn btn-primary mb-3">Add new book</a>
+        </div>
+        <div class="col-4">
+            <input type="text"
+                   class="form-control"
+                   name="searchText"
+                   [(ngModel)]="searchText"
+                   placeholder="Search book"
+                   (keyup)="searchBook()"
+            >
+        </div>
+    </div>
   <div class="row">
       <div class="col-4" *ngFor="let book of books">
           <div class="card card-body">
-              <div class="card-title">{{book.name}}</div>
+              <div class="card-title d-flex align-items-center">{{book.name}}
+                  <span class="badge badge-success ml-auto">{{book.price | currency: 'USD'}}</span>
+              </div>
+
               <span class="text-info">{{book.author}}</span>
+              <span class="text-primary">{{book.date | customDate:'ru-Ru':'full'}}</span>
               <p class="card-text">{{book.description}}</p>
-              <a href="{{link.link}}" *ngFor="let link of book.link">{{link.type}}</a>
+              <a href="{{link.link}}" *ngFor="let link of book.links">{{link.type}}</a>
               <button class="btn btn-danger mt-3" (click)="deleteBook(book.id)">Delete</button>
               <a class="btn btn-primary mt-3" routerLink="/books/{{book.id}}">Edit</a>
       </div>

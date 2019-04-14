@@ -24,10 +24,12 @@ export class AddBookComponent implements OnInit {
 
       this.book = {
           id: this.bookId,
+          price:null,
+          date: '',
           name: '',
           author: '',
           description: '',
-          link: [
+          links: [
               {
                   type: 'epub',
                   link: ''
