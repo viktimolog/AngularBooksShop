@@ -19,6 +19,22 @@ export class ClientHomeComponent implements OnInit {
   ngOnInit() {
       // Get all books
       this.booksService.getBooks().subscribe((books: Book[]) => this.books = books);
+
+      //Clear all items
+      this.basketService.clearAllItemsEvent.subscribe(status => {
+          if (status) {
+              this.books.forEach(book => {
+                  book.isAddBasket = false;
+              });
+          }
+      });
+
+      //Delete one item
+      this.basketService.deleteItemEvent.subscribe(id => {
+          if (id) {
+              this.books.find(book => book.id === id).isAddBasket = false;
+          }
+      });
   }
 
   addBook(book: Book) {

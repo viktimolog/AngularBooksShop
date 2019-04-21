@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../../services/basket.service';
-import { Book } from '../../models/Book';
 
 @Component({
   selector: 'app-basket',
@@ -19,5 +18,15 @@ export class BasketComponent implements OnInit {
       this.basketService.getBasketItems().subscribe(items => {
           this.basketItems = items;
       });
+  }
+
+  clearBasket() {
+      this.basketService.clearBasket().subscribe(items => {
+          this.basketItems = items;
+      });
+  }
+
+  deleteBasketItem(id){
+      this.basketService.deleteItem(id);
   }
 }
