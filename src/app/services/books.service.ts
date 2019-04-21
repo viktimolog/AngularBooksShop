@@ -44,7 +44,7 @@ export class BooksService {
     }
 
     deleteBook(id: string) {
-        return of(this.afs.doc(`books/ + ${id}`).delete());
+        return of(this.afs.doc(`books/${id}`).delete());
     }
 
     editBook(book: Book) {
