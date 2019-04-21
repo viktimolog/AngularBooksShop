@@ -22,7 +22,7 @@ export class ClientHomeComponent implements OnInit {
 
       //Clear all items
       this.basketService.clearAllItemsEvent.subscribe(status => {
-          if (status) {
+          if (status && this.books.length) {
               this.books.forEach(book => {
                   book.isAddBasket = false;
               });

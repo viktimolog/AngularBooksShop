@@ -35,6 +35,5 @@ export class PanelComponent implements OnInit {
 
   searchBook() {
       this.searchingResult = this.books.filter((book: Book) => book.name.toLowerCase().indexOf(this.searchText) !== -1);
-      console.log({searchingResult: this.searchingResult});
   }
 }

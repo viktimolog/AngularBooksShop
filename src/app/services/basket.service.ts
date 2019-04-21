@@ -27,7 +27,7 @@ export class BasketService {
   deleteItem(id) {
       //delete item
       for (let i = 0; i < this.purchaseList.length; i++) {
-          if (this.purchaseList[i].id === id){
+          if (this.purchaseList[i].id === id) {
               this.purchaseList.splice(i, 1);
               break;
           }
