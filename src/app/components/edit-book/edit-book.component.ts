@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from '../../services/books.service';
 import { Book } from '../../models/Book';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-edit-book',
@@ -14,23 +15,38 @@ export class EditBookComponent implements OnInit {
   constructor(
       public booksService: BooksService,
       public activatedRoute: ActivatedRoute,
-      public router: Router
+      public router: Router,
+      public flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
-      // this.bookId = this.activatedRoute.snapshot.params.id;
-      // this.booksService.getBookById(this.bookId).subscribe((book: Book) => {
-      //       this.book = book;
-      // });
+      //Get current book
+      this.bookId = this.activatedRoute.snapshot.params.id;
+      this.booksService.getBookById(this.bookId).subscribe((book: Book) => this.book = book);
   }
 
-  // editBook() {
-  //   const updatedBook = {...this.book};
-  //   this.booksService.editBook(updatedBook).subscribe((book: Book) => {
-  //       if (book) {
-  //           //Here will be success message
-  //           this.router.navigate(['/panel']);
-  //       }
-  //   });
-  // }
+  editBook() {
+    const updatedBook = {...this.book};
+    this.booksService.editBook(updatedBook).subscribe(promise => {
+        promise.then(res => {
+            //Here is success message
+            this.flashMessage.show('The book has been edited!', {
+                cssClass: 'alert-success',
+                showCloseBtn: true,
+                closeOnClick: true,
+                timeout: 3000
+            });
+            this.router.navigate(['/panel']);
+        })
+            .catch(error => {
+                //Here is error message
+                this.flashMessage.show(error.message, {
+                    cssClass: 'alert-danger',
+                    showCloseBtn: true,
+                    closeOnClick: true,
+                    timeout: 5000
+                });
+            });
+    });
+  }
 }

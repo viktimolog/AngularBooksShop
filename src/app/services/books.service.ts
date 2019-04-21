@@ -7,12 +7,12 @@ import {
 } from 'angularfire2/firestore';
 import { Book } from '../models/Book';
 
-
 @Injectable()
 export class BooksService {
     booksCollection: AngularFirestoreCollection<Book>;
     bookDocument: AngularFirestoreDocument<Book>;
     books: Observable<Book[]>;
+    book: Observable<Book>;
 
     constructor(
         private afs: AngularFirestore
@@ -34,25 +34,20 @@ export class BooksService {
     }
 
     getBookById(id: string) {
-
+        this.bookDocument = this.afs.doc<Book>(`books/${id}`);
+        this.book = this.bookDocument.valueChanges();
+        return this.book;
     }
 
-    // addBook(book: Book) {
-    //     this.books.unshift(book);
-    //     return of(this.books);
-    // }
-    //
-    // editBook(book: Book) {
-    //     this.books = this.books.map(item => {
-    //        if (item.id === book.id) {
-    //            item = book;
-    //        }
-    //        return item;
-    //     });
-    //     return of(book);
-    // }
-    //
-    // deleteBook(id: string) {
-    //     return of(this.books.filter(item => item.id !== id));
-    // }
+    addBook(book: Book) {
+        return of(this.booksCollection.add(book));
+    }
+
+    deleteBook(id: string) {
+        return of(this.afs.doc(`books/ + ${id}`).delete());
+    }
+
+    editBook(book: Book) {
+        return of(this.bookDocument.update(book));
+    }
 }

@@ -3,6 +3,7 @@ import { BooksService } from '../../services/books.service';
 import { Book } from '../../models/Book';
 import { CurrencyService } from '../../services/currency.service';
 import { Currency } from '../../models/Currency';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-panel',
@@ -17,7 +18,8 @@ export class PanelComponent implements OnInit {
 
   constructor(
       public booksService: BooksService,
-      public currencyService: CurrencyService
+      public currencyService: CurrencyService,
+      public flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
@@ -29,9 +31,28 @@ export class PanelComponent implements OnInit {
       });
   }
 
-  // deleteBook(id: string) {
-  //     this.booksService.deleteBook(id).subscribe((books: Book[]) => this.books = books);
-  // }
+  deleteBook(id: string) {
+      this.booksService.deleteBook(id).subscribe(promise => {
+          promise.then(res => {
+              //Here is success message
+              this.flashMessage.show('The book has been deleted!', {
+                  cssClass: 'alert-success',
+                  showCloseBtn: true,
+                  closeOnClick: true,
+                  timeout: 3000
+              });
+          })
+              .catch(error => {
+                  //Here is error message
+                  this.flashMessage.show(error.message, {
+                      cssClass: 'alert-danger',
+                      showCloseBtn: true,
+                      closeOnClick: true,
+                      timeout: 5000
+                  });
+              });
+      });
+  }
 
   searchBook() {
       this.searchingResult = this.books.filter((book: Book) => book.name.toLowerCase().indexOf(this.searchText) !== -1);
