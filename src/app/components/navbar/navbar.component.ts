@@ -29,7 +29,6 @@ export class NavbarComponent implements OnInit {
 
       this.router.events.subscribe((e: Event) => {
           if (e instanceof NavigationEnd) {
-              // this.isPublic = e.url.indexOf('panel') === -1;
               this.isPublic = !e.url.includes('panel');
           }
       });
