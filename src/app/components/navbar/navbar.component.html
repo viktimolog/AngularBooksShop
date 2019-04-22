@@ -23,16 +23,6 @@
                     Home
                 </a>
             </li>
-            <li class="nav-item" *ngIf="isLogin">
-                <a
-                        class="nav-link"
-                        routerLink="/panel"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{exact: true}"
-                >
-                    Panel
-                </a>
-            </li>
             <li class="nav-item">
                 <a
                     class="nav-link"
@@ -41,6 +31,16 @@
                     [routerLinkActiveOptions]="{exact: true}"
                 >
                     About
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="isLogin">
+                <a
+                        class="nav-link"
+                        routerLink="/panel"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                >
+                    Admin Panel
                 </a>
             </li>
         </ul>
