@@ -9,14 +9,13 @@ export class CustomDatePipe implements PipeTransform {
     const date = new Date(value);
     let result;
 
-    switch (format){
+    switch (format) {
         case 'full':
             result = date.toLocaleString(locale, {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric',
-                hour: '2-digit'
+                day: 'numeric'
             });
             break;
         case 'short':
@@ -24,8 +23,7 @@ export class CustomDatePipe implements PipeTransform {
                 weekday: 'short',
                 year: 'numeric',
                 month: 'short',
-                day: 'numeric',
-                hour: '2-digit'
+                day: 'numeric'
             });
             break;
         default:

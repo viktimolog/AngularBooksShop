@@ -5,6 +5,18 @@
       </h2>
       <form #form="ngForm" (ngSubmit)="editBook()">
           <div class="form-group">
+              <label for="name">Price</label>
+              <input
+                      type="number"
+                      class="form-control"
+                      name="price"
+                      [(ngModel)]="book.price"
+                      id="price"
+                      #price="ngModel"
+                      required
+              >
+          </div>
+          <div class="form-group">
               <label for="name">Name</label>
               <input
                   type="text"
@@ -37,6 +49,18 @@
                       [(ngModel)]="book.author"
                       id="author"
                       #bookAuthor="ngModel"
+                      required
+              >
+          </div>
+          <div class="form-group">
+              <label for="date">Date</label>
+              <input
+                      type="date"
+                      class="form-control"
+                      name="date"
+                      [(ngModel)]="book.date"
+                      id="date"
+                      #bookDate="ngModel"
                       required
               >
           </div>
